@@ -6,10 +6,10 @@ function Article() {
     const article = articles.find(article => article.name === articleId);
     return (
         <>
-            <h1>{article.title}</h1>
+            <h1 className="font-bold text-2xl pb-2">{article.title}</h1>
             {
-                article.content.map(paragrpah => (
-                    <p>{paragrpah}</p>
+                article.content.map((paragrpah, i) => (
+                    <p key={i}>{paragrpah}</p>
                 ))
             }
         </>
