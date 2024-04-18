@@ -16,7 +16,7 @@ function Home() {
                 </header>
 
                 {/* Main Content */}
-                <main className="bg-white shadow-md rounded-lg mx-4 p-8 mt-6">
+                <main className="bg-white shadow-md rounded-lg mx-4 p-8 mt-6 mb-4">
                     <h2 className="text-3xl font-bold mb-4">Latest Articles</h2>
                     <p className="text-lg mb-8">Explore tutorials, tech reviews, and coding tips. Stay updated with the latest in web development.</p>
                     {/* Article List */}

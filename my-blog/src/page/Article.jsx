@@ -9,7 +9,7 @@ function Article() {
     if (!article) return <NotFoundPage />;
 
     return (
-        <div className="bg-gray-100 min-h-screen flex flex-col items-center gap-6 p-6">
+        <div className="bg-gray-100 min-h-screen flex flex-col x-12 items-center gap-6 p-6">
             <article className="prose lg:prose-xl max-w-none p-8 bg-white rounded-lg shadow-lg">
                 <h1 className="font-bold text-3xl pb-2">{article.title}</h1>
                 {article.content.map((paragraph, i) => (
