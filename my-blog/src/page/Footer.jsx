@@ -9,16 +9,16 @@ function Footer() {
                 <div className="flex justify-center">
                     {/* Replace # with your actual social media links */}
                     <a target="_blank" href="https://www.linkedin.com/in/saradpoudel/" className="text-white mx-2">
-                        <FaLinkedin size={30} className="inline-block" />
+                        <FaLinkedin size={30} className="inline-block hover:scale-125" />
                     </a>
                     <a target="_blank" href="https://github.com/saradpoudel/" className="text-white mx-2">
-                        <FaGithub size={30} className="inline-block" />
+                        <FaGithub size={30} className="inline-block hover:scale-125" />
                     </a>
                     <a target="_blank" href="mailto:sarad@saradpoudel.com.au" className="text-white mx-2">
-                        <FaEnvelope size={30} className="inline-block" />
+                        <FaEnvelope size={30} className="inline-block hover:scale-125" />
                     </a>
                     <a target="_blank" href="https://saradpoudel.com.au/" className="text-white mx-2">
-                        <FaGlobe size={30} className="inline-block" />
+                        <FaGlobe size={30} className="inline-block hover:scale-125" />
                     </a>
                 </div>
                 <p className="text-md pt-2 text-white">© 2024 My Developer Blog. All rights reserved.</p>
