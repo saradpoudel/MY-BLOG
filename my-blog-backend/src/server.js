@@ -1,6 +1,5 @@
 import express from 'express';
-import { MongoClient } from 'mongodb';
-
+import { db, connectToDb } from './db.js';
 
 const app = express();
 app.use(express.json());
@@ -8,10 +7,6 @@ app.use(express.json());
 app.get('/api/articles/:name', async (req, res) => {
     const { name } = req.params;
 
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
-    await client.connect();
-
-    const db = client.db('react-blog-db');
 
     const article = await db.collection('articles').findOne({ name });
 
@@ -27,17 +22,14 @@ app.get('/api/articles/:name', async (req, res) => {
 app.put('/api/articles/:name/upvote', async (req, res) => {
     const { name } = req.params;
 
-    const client = new MongoClient('mongodb://127.0.0.1:27017')
-    await client.connect();
 
-    const db = client.db('react-blog-db');
     await db.collection('articles').updateOne({ name }, {
         $inc: { upvotes: 1 },
     });
     const article = await db.collection('articles').findOne({ name });
 
     if (article) {
-        res.send(`The ${name} article now has ${article.upvotes} upvotes!!!`);
+        res.json(article);
     } else {
         res.send('That article doesn\'t exist');
     }
@@ -46,10 +38,7 @@ app.post('/api/articles/:name/comments', async (req, res) => {
     const { name } = req.params;
     const { postedBy, text } = req.body;
 
-    const client = new MongoClient('mongodb://127.0.0.1:27017')
-    await client.connect();
 
-    const db = client.db('react-blog-db');
 
     await db.collection('articles').updateOne({ name }, {
         $push: {
@@ -64,7 +53,13 @@ app.post('/api/articles/:name/comments', async (req, res) => {
     } else {
         res.send('That article doesn\'t exist!!');
     }
-})
-app.listen(8000, () => {
-    console.log("server listening on port 8000")
 });
+
+connectToDb(() => {
+    console.log('sucessfully connected to database');
+    app.listen(8000, () => {
+        console.log("server listening on port 8000");
+    });
+})
+
+
