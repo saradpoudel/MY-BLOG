@@ -1,7 +1,13 @@
 import fs from 'fs';
+import path from 'path';
 import admin from 'firebase-admin';
 import express from 'express';
+import 'dotenv/config';
 import { db, connectToDb } from './db.js';
+
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const credentials = JSON.parse(
     fs.readFileSync('./credentials.json')
@@ -10,9 +16,13 @@ admin.initializeApp({
     credential: admin.credential.cert(credentials),
 });
 
-
 const app = express();
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../dist')));
+
+app.get(/^(?!\/api).+/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+})
 
 app.use(async (req, res, next) => {
     const { authtoken } = req.headers;
@@ -21,10 +31,12 @@ app.use(async (req, res, next) => {
         try {
             req.user = await admin.auth().verifyIdToken(authtoken);
         } catch (e) {
-            res.sendStatus(400);
+            return res.sendStatus(400);
         }
     }
+
     req.user = req.user || {};
+
     next();
 });
 
@@ -36,7 +48,7 @@ app.get('/api/articles/:name', async (req, res) => {
 
     if (article) {
         const upvoteIds = article.upvoteIds || [];
-        article.canUpvote = uid && !upvoteIds.includeS(uid);
+        article.canUpvote = uid && !upvoteIds.includes(uid);
         res.json(article);
     } else {
         res.sendStatus(404);
@@ -59,7 +71,7 @@ app.put('/api/articles/:name/upvote', async (req, res) => {
 
     if (article) {
         const upvoteIds = article.upvoteIds || [];
-        const canUpvote = uid && !upvoteIds.includeS(uid);
+        const canUpvote = uid && !upvoteIds.includes(uid);
 
         if (canUpvote) {
             await db.collection('articles').updateOne({ name }, {
@@ -92,12 +104,11 @@ app.post('/api/articles/:name/comments', async (req, res) => {
     }
 });
 
+const PORT = process.env.PORT || 8000;
+
 connectToDb(() => {
-    console.log('sucessfully connected to database');
-    app.listen(8000, () => {
-        console.log("server listening on port 8000");
+    console.log('Successfully connected to database!');
+    app.listen(PORT, () => {
+        console.log('Server is listening on port ' + PORT);
     });
 })
-
-
-
