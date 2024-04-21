@@ -6,6 +6,8 @@ import ArticlesList from "./page/ArticlesList"
 import Article from "./page/Article"
 import NotFoundPage from './page/NotFoundPage';
 import Footer from './page/Footer';
+import LoginPage from './page/Login';
+import CreateAccountPage from './page/CreateAccount';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/articles' element={<ArticlesList />} />
             <Route path='/articles/:articleId' element={<Article />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/create-account" element={<CreateAccountPage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Routes>
         </div>
