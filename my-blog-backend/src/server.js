@@ -15,8 +15,6 @@ app.get('/api/articles/:name', async (req, res) => {
     } else {
         res.sendStatus(404);
     }
-
-    res.json(article);
 });
 
 app.put('/api/articles/:name/upvote', async (req, res) => {
