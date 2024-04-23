@@ -46,7 +46,7 @@ function Article() {
             <article className="max-w-6xl mx-auto prose lg:prose-xl  p-8 bg-white rounded-lg shadow-lg">
 
                 <h1 className="font-bold text-3xl pb-2">{article.title}</h1>
-                <div className="upvotes-section">
+                <div className="flex items-center gap-4">
                     {user
                         ? <button onClick={addUpvote}>{canUpvote ? 'Upvote' : 'Already Upvoted'}</button>
                         : <button>Log in to upvote</button>}
