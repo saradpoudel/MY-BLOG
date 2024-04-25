@@ -21,7 +21,7 @@ function Footer() {
                         <FaGlobe size={30} className="inline-block hover:scale-125" />
                     </a>
                 </div>
-                <p className="text-md pt-2 text-white">© 2024 My Developer Blog. All rights reserved.</p>
+                <p className="text-md pt-2 text-white">&copy; 2024 saradpoudel.com.au. All rights reserved.</p>
             </div>
         </footer>
     );

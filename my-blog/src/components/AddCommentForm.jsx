@@ -23,12 +23,12 @@ const AddCommentForm = ({ articleName, onArticleUpdated }) => {
     };
 
     return (
-        <div id="add-comment-form" className="mt-6 mb-6">
-            <h3 className="text-2xl font-bold mb-4 text-center text-gray-900 border-b-2 border-gray-300 mt-2  p-2 shadow-md rounded-md inline-block">Add a Comment</h3>
+        <div id="add-comment-form" className="mt-6 mb-6 ">
+            <h3 className="text-2xl font-bold mb-4 text-center text-gray-900 border-b-2 border-gray-300 mt-2  p-2 shadow-md rounded-md inline-block  bg-slate-300">Add a Comment</h3>
             {user && <p className="text-gray-700">You are posting as {user.email}</p>}
             <div className="flex flex-col items-center">
                 <textarea
-                    className="border border-gray-300 rounded-lg p-2 mt-2 w-2/4 text-center"
+                    className="border border-gray-300 rounded-lg p-2 mt-2 w-1/3 text-center"
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
                     rows="4"
